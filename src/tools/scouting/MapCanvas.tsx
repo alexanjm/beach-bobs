@@ -146,7 +146,7 @@ export function MapCanvas(props: MapCanvasProps) {
         title: location.title,
         zIndexOffset: selected ? 1000 : 0,
       })
-        .on('click', (e) => {
+        .on('click', (e: L.LeafletMouseEvent) => {
           L.DomEvent.stopPropagation(e)
           handlers.current.onSelect(location.id)
         })
