@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-20T22:05:30-04:00",
-  "commit": "8a0e59415d08465ba5da4dd17025acdbbbe70a2f",
+  "generatedAt": "2026-09-20T22:08:25-04:00",
+  "commit": "f5a4e34c1ad0739c5817dcd52726cb38cb90f9c0",
   "collections": {
     "categories": {
       "artifact": {
@@ -128,12 +128,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Astraeos",
-          "image": null,
+          "image": "maps/astraeos.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "791ff1bd2d120f11e4333a07d74b56d9a2aa3b1e"
+        "sha": "57c38966e45be78482e5949565af508b47ba9176"
       },
       "extinction": {
         "record": {
@@ -144,12 +144,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Extinction",
-          "image": null,
+          "image": "maps/extinction.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "25a77a36f7c470925690573c2d271a4b2fc9d2c7"
+        "sha": "ea5225980dbbd636c1cd6ad74bc1879978fe37df"
       },
       "genesis-part-1": {
         "record": {
@@ -160,12 +160,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Genesis: Part 1",
-          "image": null,
+          "image": "maps/genesis-part-1.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "feb10636714ebb3a8736893876519a0120c2635a"
+        "sha": "c5f695e5a01b7e1c0474c1e7da0d4778ee61edf7"
       },
       "genesis-part-2": {
         "record": {
@@ -192,12 +192,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Lost Colony",
-          "image": null,
+          "image": "maps/lost-colony.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "8430a075138f9061957da13a00f7148fcf1a9b20"
+        "sha": "79b1ead98c4f3a7bb320614866c973b28ce5982b"
       },
       "ragnarok": {
         "record": {
@@ -208,12 +208,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Ragnarok",
-          "image": null,
+          "image": "maps/ragnarok.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "8a3c91911ab43ffe88d6d1e233d30415b3f7df41"
+        "sha": "4f6c80def55b4de741be02da84f0c0df61ed7103"
       },
       "scorched-earth": {
         "record": {
@@ -224,12 +224,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Scorched Earth",
-          "image": null,
+          "image": "maps/scorched-earth.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "95ed03dd0de12fa8da89efe11a70b965c294067e"
+        "sha": "5df89246fae18eedcbbccd02f60ed6afdb5cde24"
       },
       "the-center": {
         "record": {
@@ -240,12 +240,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "The Center",
-          "image": null,
+          "image": "maps/the-center.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "db734170a16fc7c86e95d8e1fdee57f1211b4797"
+        "sha": "cc576c27d33a9ba2d046127cda8c9c5e5ef1ed62"
       },
       "the-island": {
         "record": {
@@ -256,12 +256,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "The Island",
-          "image": null,
+          "image": "maps/the-island.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "ffb0c1de3fee7557f663a20200a3100b9954ad08"
+        "sha": "14b5dfd304590ca466a0685862cfaa67fcfe18e9"
       },
       "valguero": {
         "record": {
@@ -272,12 +272,12 @@
           "updatedAt": "2026-09-20T21:40:00.000Z",
           "updatedBy": "alex",
           "name": "Valguero",
-          "image": null,
+          "image": "maps/valguero.jpg",
           "transform": null,
           "calibration": null,
           "notes": ""
         },
-        "sha": "c92d7a31d2d849ee08eda54fc294c76d66bd5586"
+        "sha": "f06fc3803d5e811b8f3e5b3cd67a4ba5a83763bc"
       }
     },
     "notes": {
