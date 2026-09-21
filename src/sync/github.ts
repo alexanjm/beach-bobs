@@ -23,12 +23,11 @@ export class ConflictError extends Error {
 }
 
 export class GitHubError extends Error {
-  constructor(
-    message: string,
-    readonly status: number,
-  ) {
+  status: number
+  constructor(message: string, status: number) {
     super(message)
     this.name = 'GitHubError'
+    this.status = status
   }
 }
 
