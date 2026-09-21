@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-21T09:16:50-04:00",
-  "commit": "d32cf195e6454e84e6c49dddb0edac76ac1c2641",
+  "generatedAt": "2026-09-21T09:17:30-04:00",
+  "commit": "f0ad8d4a064a7421f91782814a3160fad475e256",
   "collections": {
     "categories": {
       "artifact": {
@@ -100,6 +100,28 @@
           "order": 40
         },
         "sha": "7be79271c29a9203c38aec4661d5d25413d0ed9e"
+      }
+    },
+    "locations": {
+      "24b1a990-94e5-4b8b-8bad-4a00f310a346": {
+        "record": {
+          "serverId": "7d97d785-9350-4b21-945b-2b9680035385",
+          "categoryId": "enemy-base",
+          "lat": 54.2,
+          "lon": 70.5,
+          "title": "juicy raid",
+          "notes": "only a couple heavy turrets",
+          "tags": [
+            "easy"
+          ],
+          "id": "24b1a990-94e5-4b8b-8bad-4a00f310a346",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-21T13:17:29.976Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-21T13:17:29.976Z",
+          "updatedBy": "alex"
+        },
+        "sha": "2534ed887adb0e740ae851b6591ea2c456b1a943"
       }
     },
     "maps": {
