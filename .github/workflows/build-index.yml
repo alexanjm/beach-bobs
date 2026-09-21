@@ -1,0 +1,49 @@
+name: build-index
+
+# Rebuilds data/index.json whenever a record file changes.
+#
+# Three guards keep this from triggering itself:
+#   - paths ignores its own output
+#   - the commit is marked [skip ci]
+#   - a no-op diff exits before committing at all
+# Any one alone is not enough.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - '!data/index.json'
+      - 'scripts/build-index.mjs'
+  workflow_dispatch:
+
+concurrency:
+  group: build-index
+  cancel-in-progress: false # two writes seconds apart must both be indexed
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: node scripts/build-index.mjs
+
+      - name: Commit the index
+        run: |
+          git config user.name  "index-bot"
+          git config user.email "index-bot@users.noreply.github.com"
+          git add data/index.json
+          if git diff --staged --quiet; then
+            echo "index unchanged"
+            exit 0
+          fi
+          git commit -m "chore: rebuild index [skip ci]"
+          git pull --rebase
+          git push

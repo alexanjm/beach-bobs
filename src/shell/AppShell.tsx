@@ -1,6 +1,7 @@
 import type { ComponentType, ReactNode } from 'react'
 import { TOOLS } from '../registry/registry.ts'
 import { GearIcon, SwatchIcon } from '../ui/icons.tsx'
+import { SyncBadge } from './SyncBadge.tsx'
 import { hrefFor } from './router.ts'
 
 type NavEntry = {
@@ -55,8 +56,9 @@ export function AppShell({
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 shrink-0 items-center justify-between border-b border-line-soft px-6">
+        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-line-soft px-6">
           <h1 className="text-sm font-medium text-ink">{title}</h1>
+          <SyncBadge />
         </header>
         <main className="min-h-0 flex-1 overflow-auto p-6">{children}</main>
       </div>

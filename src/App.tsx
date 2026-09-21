@@ -1,15 +1,24 @@
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { TOOLS } from './registry/registry.ts'
 import { AppShell } from './shell/AppShell.tsx'
+import { ConflictDialog } from './shell/ConflictDialog.tsx'
+import { FailedWrites } from './shell/FailedWrites.tsx'
+import { SettingsScreen } from './shell/SettingsScreen.tsx'
 import { ThemeScreen } from './shell/ThemeScreen.tsx'
 import { hrefFor, match, useHashPath } from './shell/router.ts'
+import { startSync } from './sync/store.ts'
 
 export function App() {
   const path = useHashPath()
   const resolved = resolve(path)
+
+  useEffect(startSync, [])
+
   return (
     <AppShell path={path} title={resolved.title}>
+      <FailedWrites />
       {resolved.element}
+      <ConflictDialog />
     </AppShell>
   )
 }
@@ -20,7 +29,7 @@ function resolve(path: string): Resolved {
   if (match('/', path)) return { title: 'Home', element: <Home /> }
   if (match('/theme', path)) return { title: 'Theme', element: <ThemeScreen /> }
   if (match('/settings', path))
-    return { title: 'Settings', element: <SettingsPlaceholder /> }
+    return { title: 'Settings', element: <SettingsScreen /> }
 
   for (const tool of TOOLS) {
     for (const route of tool.routes) {
@@ -39,9 +48,8 @@ function Home() {
     <div className="mx-auto max-w-2xl">
       <h2 className="text-lg text-ink">ARK Tools</h2>
       <p className="mt-2 max-w-prose text-sm text-ink-muted">
-        {TOOLS.length === 0
-          ? 'No tools registered yet. The shell, router and theme are up — tools land next.'
-          : 'Pick a tool from the sidebar.'}
+        Pick a tool from the sidebar. Everything is readable without setup; add
+        a token in settings when you want to change something.
       </p>
       <a
         href={hrefFor('/theme')}
@@ -50,15 +58,6 @@ function Home() {
         View the palette →
       </a>
     </div>
-  )
-}
-
-function SettingsPlaceholder() {
-  return (
-    <p className="text-sm text-ink-muted">
-      Settings lands with the persistence layer — token, display name, and a
-      download-everything button.
-    </p>
   )
 }
 
