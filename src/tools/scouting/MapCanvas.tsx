@@ -1,5 +1,4 @@
 import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
 import { useEffect, useRef, useState } from 'react'
 import { resolveGeometry } from './geometry.ts'
 import {
@@ -11,15 +10,12 @@ import {
   type MapGeometry,
 } from './transform.ts'
 import type { Category, Location, MapConfig } from './types.ts'
+import { useImageMap } from './useImageMap.ts'
 
 /*
-  Leaflet, driven imperatively. No react-leaflet: this is one init effect and
-  one marker-sync effect, and going direct keeps full control over marker DOM,
-  which the legibility-on-terrain requirement needs.
-
-  ARK maps are images, not geography, so CRS.Simple plus an image overlay.
-  Every GPS <-> pixel conversion goes through transform.ts; none of that maths
-  is repeated here.
+  Leaflet, driven imperatively. No react-leaflet: this is one marker-sync
+  effect on top of the shared image-map hook, and going direct keeps control
+  of the marker DOM, which the legibility-on-terrain requirement needs.
 */
 
 const MARKER_SIZE = 14
@@ -34,106 +30,53 @@ export interface MapCanvasProps {
   onSelect: (id: string | null) => void
   onMapClick: (gps: Gps) => void
   onHover?: (gps: Gps | null) => void
-  onGeometry?: (geometry: MapGeometry) => void
 }
 
 export function MapCanvas(props: MapCanvasProps) {
-  const {
-    config,
-    imageUrl,
-    locations,
-    categoryById,
-    selectedId,
-    draft,
-    onGeometry,
-  } = props
+  const { config, imageUrl, locations, categoryById, selectedId, draft } = props
 
   const hostRef = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<L.Map | null>(null)
-  const markerLayer = useRef<L.LayerGroup | null>(null)
-  const draftLayer = useRef<L.LayerGroup | null>(null)
+  const { map, size, error } = useImageMap(hostRef, imageUrl)
   const [geometry, setGeometry] = useState<MapGeometry | null>(null)
-  const [error, setError] = useState<string | null>(null)
 
   // Handlers change every render; keep them in a ref so the map is not torn
   // down and rebuilt each time.
   const handlers = useRef(props)
   handlers.current = props
 
-  /* Dimensions come from the image itself, so a map record needs no measuring. */
   useEffect(() => {
-    let cancelled = false
-    setGeometry(null)
-    setError(null)
+    setGeometry(size ? resolveGeometry(config, size.width, size.height) : null)
+  }, [config, size])
 
-    const img = new Image()
-    img.onload = () => {
-      if (cancelled) return
-      const resolved = resolveGeometry(config, img.naturalWidth, img.naturalHeight)
-      setGeometry(resolved)
-      onGeometry?.(resolved)
-    }
-    img.onerror = () => {
-      if (!cancelled) setError(`Could not load ${imageUrl}`)
-    }
-    img.src = imageUrl
+  /* Map-level interaction. */
+  useEffect(() => {
+    if (!map || !geometry) return
+
+    const toGps = (e: L.LeafletMouseEvent) =>
+      pixelToGps(geometry, leafletToPixel(geometry, [e.latlng.lat, e.latlng.lng]))
+
+    const onClick = (e: L.LeafletMouseEvent) =>
+      handlers.current.onMapClick(toGps(e))
+    const onMove = (e: L.LeafletMouseEvent) =>
+      handlers.current.onHover?.(toGps(e))
+    const onOut = () => handlers.current.onHover?.(null)
+
+    map.on('click', onClick)
+    map.on('mousemove', onMove)
+    map.on('mouseout', onOut)
 
     return () => {
-      cancelled = true
+      map.off('click', onClick)
+      map.off('mousemove', onMove)
+      map.off('mouseout', onOut)
     }
-  }, [config, imageUrl, onGeometry])
+  }, [map, geometry])
 
-  /* Init. Depends only on geometry and the image, so panning state survives
-     everything else re-rendering. */
-  useEffect(() => {
-    const host = hostRef.current
-    if (!geometry || !host) return
-
-    const bounds = L.latLngBounds([0, 0], [geometry.height, geometry.width])
-    const map = L.map(host, {
-      crs: L.CRS.Simple,
-      attributionControl: false,
-      zoomSnap: 0.25,
-      zoomControl: true,
-      maxBounds: bounds.pad(0.2),
-      maxBoundsViscosity: 0.75,
-    })
-
-    L.imageOverlay(imageUrl, bounds).addTo(map)
-    map.fitBounds(bounds)
-
-    const fitZoom = map.getBoundsZoom(bounds)
-    map.setMinZoom(fitZoom - 0.5)
-    map.setMaxZoom(fitZoom + 5)
-
-    markerLayer.current = L.layerGroup().addTo(map)
-    draftLayer.current = L.layerGroup().addTo(map)
-    mapRef.current = map
-
-    map.on('click', (e: L.LeafletMouseEvent) => {
-      const pixel = leafletToPixel(geometry, [e.latlng.lat, e.latlng.lng])
-      handlers.current.onMapClick(pixelToGps(geometry, pixel))
-    })
-    map.on('mousemove', (e: L.LeafletMouseEvent) => {
-      const pixel = leafletToPixel(geometry, [e.latlng.lat, e.latlng.lng])
-      handlers.current.onHover?.(pixelToGps(geometry, pixel))
-    })
-    map.on('mouseout', () => handlers.current.onHover?.(null))
-
-    return () => {
-      map.remove()
-      mapRef.current = null
-      markerLayer.current = null
-      draftLayer.current = null
-    }
-  }, [geometry, imageUrl])
-
-  /* Markers. Rebuilt wholesale — a few hundred pins is nothing, and diffing
+  /* Markers, rebuilt wholesale — a few hundred pins is nothing, and diffing
      them would be machinery this does not need. */
   useEffect(() => {
-    const layer = markerLayer.current
-    if (!layer || !geometry) return
-    layer.clearLayers()
+    if (!map || !geometry) return
+    const layer = L.layerGroup().addTo(map)
 
     for (const location of locations) {
       const category = categoryById.get(location.categoryId)
@@ -157,21 +100,28 @@ export function MapCanvas(props: MapCanvasProps) {
         })
         .addTo(layer)
     }
-  }, [locations, categoryById, selectedId, geometry])
+
+    return () => {
+      layer.remove()
+    }
+  }, [map, geometry, locations, categoryById, selectedId])
 
   /* The unsaved point, shown while the editor is open. */
   useEffect(() => {
-    const layer = draftLayer.current
-    if (!layer || !geometry) return
-    layer.clearLayers()
-    if (!draft) return
+    if (!map || !geometry || !draft) return
+    const marker = L.marker(
+      pixelToLeaflet(geometry, gpsToPixel(geometry, draft)),
+      {
+        icon: pinIcon('var(--color-accent)', true, true),
+        interactive: false,
+        zIndexOffset: 2000,
+      },
+    ).addTo(map)
 
-    L.marker(pixelToLeaflet(geometry, gpsToPixel(geometry, draft)), {
-      icon: pinIcon('var(--color-accent)', true, true),
-      interactive: false,
-      zIndexOffset: 2000,
-    }).addTo(layer)
-  }, [draft, geometry])
+    return () => {
+      marker.remove()
+    }
+  }, [map, geometry, draft])
 
   if (error) {
     return (

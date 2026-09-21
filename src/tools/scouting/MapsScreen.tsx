@@ -1,4 +1,5 @@
 import { assetUrl } from '../../config.ts'
+import { hrefFor } from '../../shell/router.ts'
 import { useRecords } from '../../sync/store.ts'
 import { Panel } from '../../ui/Panel.tsx'
 import { ScoutingNav } from './ScoutingNav.tsx'
@@ -94,6 +95,12 @@ function MapCard({ map, servers }: { map: MapConfig; servers: number }) {
           {map.image ? SOURCE_LABEL[source] : 'no image'}
         </div>
       </div>
+      <a
+        href={hrefFor(`/scouting/maps/${map.id}/calibrate`)}
+        className="shrink-0 rounded-control px-2 py-1 text-xs text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
+      >
+        Calibrate
+      </a>
     </div>
   )
 }
