@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/*
+  ARK Tools palette. Every colour in the app comes from here.
+  Dark only, by design — there is no light theme and no toggle.
+
+  Surfaces are warm-desaturated near-blacks. Depth comes from elevation
+  between layers, not from borders. Text is bone, not white. Amber is the
+  single accent and is rationed. Cyan is rarer still and means tek-tier.
+
+  Marker colours are a separate ramp: they encode data, not brand, so they
+  are allowed to be plural. They stay muted and always carry a dark outline
+  so they read against busy terrain imagery.
+*/
+@theme {
+  /* ——— surfaces, low to high elevation ——— */
+  --color-bg: #0f0e0d;
+  --color-surface: #171614;
+  --color-surface-2: #1f1d1a;
+  --color-surface-3: #292621;
+  --color-line: #332f29;
+  --color-line-soft: #24211d;
+
+  /* ——— text ——— */
+  --color-ink: #e8e1d4;
+  --color-ink-muted: #a49b8b;
+  --color-ink-faint: #6e6659;
+
+  /* ——— amber: the accent. active states, primary actions, selection ——— */
+  --color-accent: #d98b2b;
+  --color-accent-hi: #e89a3c;
+  --color-accent-lo: #bf7620;
+  --color-accent-ink: #1a1206;
+  --color-accent-dim: #3a2a11;
+
+  /* ——— cyan: tek-tier and high-value only ——— */
+  --color-tek: #42b5cc;
+  --color-tek-ink: #04191d;
+  --color-tek-dim: #10333a;
+
+  /* ——— status ——— */
+  --color-ok: #6d9e4f;
+  --color-warn: #d9a62b;
+  --color-danger: #c4543c;
+  --color-danger-dim: #3a1c16;
+
+  /* ——— marker ramp: data encoding, not brand ——— */
+  --color-marker-red: #c4543c;
+  --color-marker-olive: #7a9e4f;
+  --color-marker-steel: #4a8fb5;
+  --color-marker-violet: #8c6bb1;
+  --color-marker-amber: #d9a62b;
+  --color-marker-cyan: #42b5cc;
+  --color-marker-orange: #d98b2b;
+  --color-marker-stone: #8a8272;
+  --color-marker-outline: #0f0e0d;
+
+  /* ——— type ——— */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ——— radii: utilitarian, not pill-shaped ——— */
+  --radius-panel: 6px;
+  --radius-control: 4px;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Section labels: small, tracked-out, uppercase. Used for panel headers. */
+.label-eyebrow {
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+::selection {
+  background: var(--color-accent-dim);
+  color: var(--color-ink);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

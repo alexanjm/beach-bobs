@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/registry/registry.ts","./src/registry/types.ts","./src/shell/appshell.tsx","./src/shell/themescreen.tsx","./src/shell/router.test.ts","./src/shell/router.ts","./src/ui/button.tsx","./src/ui/panel.tsx","./src/ui/icons.tsx"],"version":"5.9.3"}
