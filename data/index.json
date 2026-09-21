@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-20T22:08:25-04:00",
-  "commit": "f5a4e34c1ad0739c5817dcd52726cb38cb90f9c0",
+  "generatedAt": "2026-09-21T09:16:50-04:00",
+  "commit": "d32cf195e6454e84e6c49dddb0edac76ac1c2641",
   "collections": {
     "categories": {
       "artifact": {
@@ -306,6 +306,24 @@
           "updatedBy": "alex"
         },
         "sha": "dff40009e89897795f118a73c370230c859d0b41"
+      }
+    },
+    "servers": {
+      "7d97d785-9350-4b21-945b-2b9680035385": {
+        "record": {
+          "name": "NA-PVP-TheIsland69",
+          "mapId": "the-island",
+          "cluster": "Small Tribes",
+          "lastPlayed": "2026-09-21",
+          "notes": "scouted, haven't found anything yet",
+          "id": "7d97d785-9350-4b21-945b-2b9680035385",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-21T13:16:50.340Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-21T13:16:50.340Z",
+          "updatedBy": "alex"
+        },
+        "sha": "c3c0d27bb2f10005c6d3f9768f84f0c6e8fae7b4"
       }
     }
   }
