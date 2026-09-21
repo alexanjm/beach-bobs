@@ -3,6 +3,7 @@ import { TOOLS } from './registry/registry.ts'
 import { AppShell } from './shell/AppShell.tsx'
 import { ConflictDialog } from './shell/ConflictDialog.tsx'
 import { FailedWrites } from './shell/FailedWrites.tsx'
+import { RouteParamsProvider } from './shell/RouteParams.tsx'
 import { SettingsScreen } from './shell/SettingsScreen.tsx'
 import { ThemeScreen } from './shell/ThemeScreen.tsx'
 import { hrefFor, match, useHashPath } from './shell/router.ts'
@@ -17,30 +18,39 @@ export function App() {
   return (
     <AppShell path={path} title={resolved.title}>
       <FailedWrites />
-      {resolved.element}
+      <RouteParamsProvider params={resolved.params}>
+        {resolved.element}
+      </RouteParamsProvider>
       <ConflictDialog />
     </AppShell>
   )
 }
 
-type Resolved = { title: string; element: ReactNode }
+type Resolved = {
+  title: string
+  element: ReactNode
+  params: Record<string, string>
+}
 
 function resolve(path: string): Resolved {
-  if (match('/', path)) return { title: 'Home', element: <Home /> }
-  if (match('/theme', path)) return { title: 'Theme', element: <ThemeScreen /> }
-  if (match('/settings', path))
-    return { title: 'Settings', element: <SettingsScreen /> }
+  const shell = (title: string, element: ReactNode): Resolved => ({
+    title,
+    element,
+    params: {},
+  })
+
+  if (match('/', path)) return shell('Home', <Home />)
+  if (match('/theme', path)) return shell('Theme', <ThemeScreen />)
+  if (match('/settings', path)) return shell('Settings', <SettingsScreen />)
 
   for (const tool of TOOLS) {
     for (const route of tool.routes) {
-      const pattern = `/${tool.id}/${route.path}`
-      if (match(pattern, path)) {
-        return { title: tool.label, element: route.element }
-      }
+      const params = match(`/${tool.id}/${route.path}`, path)
+      if (params) return { title: tool.label, element: route.element, params }
     }
   }
 
-  return { title: 'Not found', element: <NotFound path={path} /> }
+  return shell('Not found', <NotFound path={path} />)
 }
 
 function Home() {

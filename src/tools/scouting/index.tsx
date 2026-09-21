@@ -1,6 +1,8 @@
 import type { ToolModule } from '../../registry/types.ts'
 import { MapIcon } from '../../ui/icons.tsx'
 import { MapsScreen } from './MapsScreen.tsx'
+import { ServerMapScreen } from './ServerMapScreen.tsx'
+import { ServersScreen } from './ServersScreen.tsx'
 import {
   parseCategory,
   parseLocation,
@@ -12,7 +14,11 @@ export const scouting: ToolModule = {
   id: 'scouting',
   label: 'Scouting',
   icon: MapIcon,
-  routes: [{ path: '', element: <MapsScreen /> }],
+  routes: [
+    { path: '', element: <ServersScreen /> },
+    { path: 'maps', element: <MapsScreen /> },
+    { path: 's/:serverId', element: <ServerMapScreen /> },
+  ],
   collections: [
     { name: 'maps', parse: parseMapConfig },
     { name: 'categories', parse: parseCategory },

@@ -1,6 +1,7 @@
 import { assetUrl } from '../../config.ts'
 import { useRecords } from '../../sync/store.ts'
 import { Panel } from '../../ui/Panel.tsx'
+import { ScoutingNav } from './ScoutingNav.tsx'
 import { transformSource } from './geometry.ts'
 import type { Category, MapConfig, Server } from './types.ts'
 
@@ -22,6 +23,7 @@ export function MapsScreen() {
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4">
+      <ScoutingNav />
       {withImage.length === 0 && maps.length > 0 && (
         <div className="rounded-panel bg-surface-2 px-4 py-3 text-sm text-ink-muted">
           No map images yet. Drop them in{' '}

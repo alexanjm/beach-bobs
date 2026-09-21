@@ -16,6 +16,13 @@ import type { MapConfig } from './types.ts'
 
 export const GPS_PRECISION = 1
 
+/**
+ * Stand-in for a map with no image yet: a labelled GPS grid. Pins land at
+ * their true coordinates on it, so the whole tool is usable — and the
+ * transform is visibly verifiable — before any real imagery arrives.
+ */
+export const PLACEHOLDER_IMAGE = 'maps/placeholder-grid.svg'
+
 export function resolveGeometry(
   config: MapConfig,
   naturalWidth: number,
