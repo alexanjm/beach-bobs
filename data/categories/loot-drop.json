@@ -1,0 +1,11 @@
+{
+  "id": "loot-drop",
+  "schemaVersion": 1,
+  "createdAt": "2026-09-20T21:40:00.000Z",
+  "createdBy": "alex",
+  "updatedAt": "2026-09-20T21:40:00.000Z",
+  "updatedBy": "alex",
+  "label": "Loot drop",
+  "color": "marker-amber",
+  "order": 60
+}

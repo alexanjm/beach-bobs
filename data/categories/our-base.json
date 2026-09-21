@@ -1,0 +1,11 @@
+{
+  "id": "our-base",
+  "schemaVersion": 1,
+  "createdAt": "2026-09-20T21:40:00.000Z",
+  "createdBy": "alex",
+  "updatedAt": "2026-09-20T21:40:00.000Z",
+  "updatedBy": "alex",
+  "label": "Our base",
+  "color": "marker-orange",
+  "order": 20
+}
