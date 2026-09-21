@@ -4,60 +4,72 @@
   ARK Tools palette. Every colour in the app comes from here.
   Dark only, by design — there is no light theme and no toggle.
 
-  Surfaces are warm-desaturated near-blacks. Depth comes from elevation
-  between layers, not from borders. Text is bone, not white. Amber is the
-  single accent and is rationed. Cyan is rarer still and means tek-tier.
+  Lifted from the Survival Ascended mark: a void-black field, one electric
+  blue halo, and a triangle of tek plates in coral, amber and lime.
+
+  Surfaces are cold blue-blacks. Depth comes from elevation between layers,
+  not from borders. Text is ice, not white. Ascended blue is the accent and
+  it glows — rationed so the glow still means something. The prism trio
+  (coral / amber / lime) is the brand signature: the mark, hairlines, and
+  status. It never fills a large area.
 
   Marker colours are a separate ramp: they encode data, not brand, so they
-  are allowed to be plural. They stay muted and always carry a dark outline
-  so they read against busy terrain imagery.
+  are allowed to be plural. They always carry a dark outline so they read
+  against busy terrain imagery.
 */
 @theme {
   /* ——— surfaces, low to high elevation ——— */
-  --color-bg: #0f0e0d;
-  --color-surface: #171614;
-  --color-surface-2: #1f1d1a;
-  --color-surface-3: #292621;
-  --color-line: #332f29;
-  --color-line-soft: #24211d;
+  --color-bg: #04070c;
+  --color-surface: #0a1019;
+  --color-surface-2: #101925;
+  --color-surface-3: #172231;
+  --color-line: #22324a;
+  --color-line-soft: #141f2d;
 
   /* ——— text ——— */
-  --color-ink: #e8e1d4;
-  --color-ink-muted: #a49b8b;
-  --color-ink-faint: #6e6659;
+  --color-ink: #e4f0fb;
+  --color-ink-muted: #8ea4bd;
+  --color-ink-faint: #56697f;
 
-  /* ——— amber: the accent. active states, primary actions, selection ——— */
-  --color-accent: #d98b2b;
-  --color-accent-hi: #e89a3c;
-  --color-accent-lo: #bf7620;
-  --color-accent-ink: #1a1206;
-  --color-accent-dim: #3a2a11;
+  /* ——— ascended blue: the accent. active states, primary actions ——— */
+  --color-accent: #38b6f5;
+  --color-accent-hi: #7fd4ff;
+  --color-accent-lo: #1c8fd0;
+  --color-accent-ink: #021420;
+  --color-accent-dim: #0b2a42;
+  --color-accent-glow: rgb(56 182 245 / 0.45);
 
-  /* ——— cyan: tek-tier and high-value only ——— */
-  --color-tek: #42b5cc;
-  --color-tek-ink: #04191d;
-  --color-tek-dim: #10333a;
+  /* ——— tek: the white-hot core of the beam. tek-tier and high-value ——— */
+  --color-tek: #b5f1ff;
+  --color-tek-ink: #03161c;
+  --color-tek-dim: #0f3440;
 
-  /* ——— status ——— */
-  --color-ok: #6d9e4f;
-  --color-warn: #d9a62b;
-  --color-danger: #c4543c;
-  --color-danger-dim: #3a1c16;
+  /* ——— prism: the three plates of the mark. signature only ——— */
+  --color-prism-coral: #ec6a55;
+  --color-prism-amber: #f2a93b;
+  --color-prism-lime: #c3dc4a;
+
+  /* ——— status (borrowed from the prism, so it feels native) ——— */
+  --color-ok: #a9cf45;
+  --color-warn: #f2a93b;
+  --color-danger: #ec6a55;
+  --color-danger-dim: #3a1712;
 
   /* ——— marker ramp: data encoding, not brand ——— */
-  --color-marker-red: #c4543c;
-  --color-marker-olive: #7a9e4f;
-  --color-marker-steel: #4a8fb5;
-  --color-marker-violet: #8c6bb1;
-  --color-marker-amber: #d9a62b;
-  --color-marker-cyan: #42b5cc;
-  --color-marker-orange: #d98b2b;
-  --color-marker-stone: #8a8272;
-  --color-marker-outline: #0f0e0d;
+  --color-marker-red: #ec6a55;
+  --color-marker-olive: #a9cf45;
+  --color-marker-steel: #4f8fd6;
+  --color-marker-violet: #9a7ae0;
+  --color-marker-amber: #f2c43b;
+  --color-marker-cyan: #5ee0f2;
+  --color-marker-orange: #f28a3b;
+  --color-marker-stone: #8c98a8;
+  --color-marker-outline: #04070c;
 
   /* ——— type ——— */
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Oxanium', var(--font-sans);
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -71,17 +83,70 @@ html {
 }
 
 body {
-  background: var(--color-bg);
+  /* The halo: one cold bloom above the fold, like the ring behind the mark,
+     plus a faint beam falling from top centre. Fixed so it never scrolls. */
+  background:
+    radial-gradient(
+      ellipse 55% 50% at 55% -12%,
+      rgb(56 182 245 / 0.26),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 7% 70% at 55% -10%,
+      rgb(181 241 255 / 0.12),
+      transparent 70%
+    ),
+    var(--color-bg);
+  background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Faint tek grid over everything, masked to fade out away from the halo. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(56 182 245 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(56 182 245 / 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+}
+
+/* The prism hairline: the three plates of the mark as a 1px rule. */
+.prism-rule {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-prism-coral) 20%,
+    var(--color-prism-amber) 50%,
+    var(--color-prism-lime) 80%,
+    transparent
+  );
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Glowing things: primary actions, the active nav bar, the selected marker. */
+.glow {
+  box-shadow:
+    0 0 0 1px rgb(127 212 255 / 0.35) inset,
+    0 0 18px -4px var(--color-accent-glow);
 }
 
 /* Section labels: small, tracked-out, uppercase. Used for panel headers. */
 .label-eyebrow {
   font-size: 0.6875rem;
   line-height: 1;
-  letter-spacing: 0.09em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-ink-faint);
 }
@@ -112,7 +177,7 @@ body {
 
 .ark-tooltip {
   background: var(--color-surface-3);
-  border: none;
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-control);
   box-shadow: none;
   color: var(--color-ink);

@@ -24,24 +24,34 @@ const GROUPS: Group[] = [
   },
   {
     label: 'Text',
-    note: 'Bone, not white. Pure white on near-black reads as generic dark mode.',
+    note: 'Ice, not white. Pure white on near-black reads as generic dark mode.',
     tokens: ['--color-ink', '--color-ink-muted', '--color-ink-faint'],
   },
   {
-    label: 'Accent — amber',
-    note: 'Active states, primary buttons, selected marker. Rationed.',
+    label: 'Accent — ascended blue',
+    note: 'Active states, primary buttons, selected marker. It glows, so it is rationed.',
     tokens: [
       '--color-accent',
       '--color-accent-hi',
       '--color-accent-lo',
       '--color-accent-ink',
       '--color-accent-dim',
+      '--color-accent-glow',
     ],
   },
   {
-    label: 'Tek — cyan',
-    note: 'Rarer than amber. Tek-tier and high-value only.',
+    label: 'Tek — beam white',
+    note: 'The white-hot core of the beam. Tek-tier and high-value only.',
     tokens: ['--color-tek', '--color-tek-ink', '--color-tek-dim'],
+  },
+  {
+    label: 'Prism',
+    note: 'The three plates of the mark. Signature only: the logo, hairlines, status. Never a fill.',
+    tokens: [
+      '--color-prism-coral',
+      '--color-prism-amber',
+      '--color-prism-lime',
+    ],
   },
   {
     label: 'Status',

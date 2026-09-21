@@ -21,7 +21,7 @@ export function ScoutingNav() {
             className={[
               'rounded-control px-3 py-1.5 text-sm transition-colors',
               active
-                ? 'bg-surface-3 text-ink'
+                ? 'bg-accent-dim text-accent-hi ring-1 ring-accent/40 ring-inset shadow-[0_0_14px_-4px_var(--color-accent-glow)]'
                 : 'text-ink-muted hover:bg-surface-2 hover:text-ink',
             ].join(' ')}
           >

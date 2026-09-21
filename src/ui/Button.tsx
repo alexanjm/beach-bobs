@@ -4,9 +4,9 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
 
 const VARIANTS: Record<Variant, string> = {
   primary:
-    'bg-accent text-accent-ink hover:bg-accent-hi active:bg-accent-lo font-medium',
+    'bg-accent text-accent-ink hover:bg-accent-hi active:bg-accent-lo font-medium glow hover:shadow-[0_0_24px_-4px_var(--color-accent-glow)]',
   secondary:
-    'bg-surface-3 text-ink hover:bg-surface-3/70 ring-1 ring-line ring-inset',
+    'bg-surface-3 text-ink hover:ring-accent/50 ring-1 ring-line ring-inset',
   ghost: 'text-ink-muted hover:bg-surface-2 hover:text-ink',
   danger: 'bg-danger-dim text-danger hover:bg-danger hover:text-ink',
 }
