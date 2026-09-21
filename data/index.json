@@ -1,7 +1,285 @@
 {
-  "generatedAt": "2026-09-20T21:31:56-04:00",
-  "commit": "e02324d2a123901c4ae8d860a00a288c8d07b65b",
+  "generatedAt": "2026-09-20T21:41:36-04:00",
+  "commit": "9f83462ec2cb0c86e95c9a8978c0fbf5386e545e",
   "collections": {
+    "categories": {
+      "artifact": {
+        "record": {
+          "id": "artifact",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Artifact",
+          "color": "marker-cyan",
+          "order": 70
+        },
+        "sha": "c78f759f8b748c072e363fa5e286c00c55b97917"
+      },
+      "cave": {
+        "record": {
+          "id": "cave",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Cave",
+          "color": "marker-violet",
+          "order": 50
+        },
+        "sha": "3ffa68b774716d6a151c0e630475427380e898ee"
+      },
+      "enemy-base": {
+        "record": {
+          "id": "enemy-base",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Enemy base",
+          "color": "marker-red",
+          "order": 10
+        },
+        "sha": "740261c805c0c1dcb0efa9b4796a1cd002f7d2b0"
+      },
+      "loot-drop": {
+        "record": {
+          "id": "loot-drop",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Loot drop",
+          "color": "marker-amber",
+          "order": 60
+        },
+        "sha": "73c57db9ec26cee85b5367948a0bb29ade4f0312"
+      },
+      "our-base": {
+        "record": {
+          "id": "our-base",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Our base",
+          "color": "marker-orange",
+          "order": 20
+        },
+        "sha": "cd67cb41e6b362a3338ae273f46b90bb1c169c81"
+      },
+      "resource-node": {
+        "record": {
+          "id": "resource-node",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Resource node",
+          "color": "marker-olive",
+          "order": 30
+        },
+        "sha": "21b3dfe32e87d64d81fa2e9240e684c364569de1"
+      },
+      "spawn": {
+        "record": {
+          "id": "spawn",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "label": "Spawn",
+          "color": "marker-steel",
+          "order": 40
+        },
+        "sha": "7be79271c29a9203c38aec4661d5d25413d0ed9e"
+      }
+    },
+    "maps": {
+      "aberration": {
+        "record": {
+          "id": "aberration",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Aberration",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "f8fc32069ae1ebd260d110bab45728b942819596"
+      },
+      "astraeos": {
+        "record": {
+          "id": "astraeos",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Astraeos",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "791ff1bd2d120f11e4333a07d74b56d9a2aa3b1e"
+      },
+      "extinction": {
+        "record": {
+          "id": "extinction",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Extinction",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "25a77a36f7c470925690573c2d271a4b2fc9d2c7"
+      },
+      "genesis-part-1": {
+        "record": {
+          "id": "genesis-part-1",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Genesis: Part 1",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "feb10636714ebb3a8736893876519a0120c2635a"
+      },
+      "genesis-part-2": {
+        "record": {
+          "id": "genesis-part-2",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Genesis: Part 2",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "d72014f710048697adddb5c8170bea98a46497dc"
+      },
+      "lost-colony": {
+        "record": {
+          "id": "lost-colony",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Lost Colony",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "8430a075138f9061957da13a00f7148fcf1a9b20"
+      },
+      "ragnarok": {
+        "record": {
+          "id": "ragnarok",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Ragnarok",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "8a3c91911ab43ffe88d6d1e233d30415b3f7df41"
+      },
+      "scorched-earth": {
+        "record": {
+          "id": "scorched-earth",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Scorched Earth",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "95ed03dd0de12fa8da89efe11a70b965c294067e"
+      },
+      "the-center": {
+        "record": {
+          "id": "the-center",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "The Center",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "db734170a16fc7c86e95d8e1fdee57f1211b4797"
+      },
+      "the-island": {
+        "record": {
+          "id": "the-island",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "The Island",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "ffb0c1de3fee7557f663a20200a3100b9954ad08"
+      },
+      "valguero": {
+        "record": {
+          "id": "valguero",
+          "schemaVersion": 1,
+          "createdAt": "2026-09-20T21:40:00.000Z",
+          "createdBy": "alex",
+          "updatedAt": "2026-09-20T21:40:00.000Z",
+          "updatedBy": "alex",
+          "name": "Valguero",
+          "image": null,
+          "transform": null,
+          "calibration": null,
+          "notes": ""
+        },
+        "sha": "c92d7a31d2d849ee08eda54fc294c76d66bd5586"
+      }
+    },
     "notes": {
       "0f8b1e4a-2c7d-4a19-9d3e-6b5a2c1f7e80": {
         "record": {
