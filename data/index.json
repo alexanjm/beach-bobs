@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-20T21:41:36-04:00",
-  "commit": "9f83462ec2cb0c86e95c9a8978c0fbf5386e545e",
+  "generatedAt": "2026-09-20T22:05:30-04:00",
+  "commit": "8a0e59415d08465ba5da4dd17025acdbbbe70a2f",
   "collections": {
     "categories": {
       "artifact": {
@@ -117,7 +117,7 @@
           "calibration": null,
           "notes": ""
         },
-        "sha": "f8fc32069ae1ebd260d110bab45728b942819596"
+        "sha": "262135f7b412789394e18cc6722062a0ca55b745"
       },
       "astraeos": {
         "record": {
