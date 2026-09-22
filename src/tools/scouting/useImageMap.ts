@@ -64,16 +64,38 @@ export function useImageMap(
     })
 
     L.imageOverlay(imageUrl, bounds).addTo(instance)
-    instance.fitBounds(bounds)
 
-    const fitZoom = instance.getBoundsZoom(bounds)
-    instance.setMinZoom(fitZoom - 0.5)
-    instance.setMaxZoom(fitZoom + 5)
+    // Fit the whole image to the container. Runs again on resize, but only
+    // while the view is still the fitted one — never yanks away a view the
+    // user zoomed or panned into. A zero-size container (not laid out yet)
+    // produces a garbage zoom, so it waits for a real size.
+    let fittedZoom: number | null = null
+    const fit = () => {
+      if (host.clientWidth === 0 || host.clientHeight === 0) return
+      // getBoundsZoom clamps to the current min zoom (0 by default), and a
+      // large image on a small screen needs a negative zoom. Unclamp first.
+      instance.setMinZoom(-Infinity)
+      const fitZoom = instance.getBoundsZoom(bounds)
+      instance.setMinZoom(fitZoom - 0.5)
+      instance.setMaxZoom(fitZoom + 5)
+      instance.fitBounds(bounds, { animate: false })
+      fittedZoom = instance.getZoom()
+    }
+    fit()
 
     mapRef.current = instance
     setMap(instance)
 
+    // Leaflet measures its container once. Re-measure whenever the layout
+    // moves under it: phone rotation, a sheet opening, the sidebar collapsing.
+    const observer = new ResizeObserver(() => {
+      instance.invalidateSize({ animate: false })
+      if (fittedZoom === null || instance.getZoom() === fittedZoom) fit()
+    })
+    observer.observe(host)
+
     return () => {
+      observer.disconnect()
       instance.remove()
       mapRef.current = null
       setMap(null)

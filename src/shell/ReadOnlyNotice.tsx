@@ -11,7 +11,7 @@ export function ReadOnlyNotice() {
   if (canWrite) return null
 
   return (
-    <div className="mb-4 flex items-center justify-between gap-4 rounded-panel bg-surface-2 px-4 py-3">
+    <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-panel bg-surface-2 px-4 py-3">
       <p className="text-sm text-ink-muted">
         {hasToken
           ? 'Set your name in settings before you can add anything — records are attributed.'

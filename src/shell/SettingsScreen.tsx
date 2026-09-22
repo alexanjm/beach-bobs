@@ -71,7 +71,7 @@ function IdentityPanel() {
             setCustom(e.target.value)
             setIdentity(e.target.value)
           }}
-          className="w-40 rounded-control bg-surface-2 px-3 py-1.5 text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
+          className="w-40 rounded-control bg-surface-2 px-3 py-1.5 text-base md:text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
         />
       </div>
     </Panel>
@@ -141,7 +141,7 @@ function TokenPanel() {
           placeholder={token ? 'Replace token…' : 'ghp_…'}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && void save()}
-          className="min-w-0 flex-1 rounded-control bg-surface-2 px-3 py-1.5 font-mono text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
+          className="min-w-0 flex-1 rounded-control bg-surface-2 px-3 py-1.5 font-mono text-base md:text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
         />
         <Button
           variant="primary"

@@ -20,7 +20,7 @@ export function Button({
     <button
       {...rest}
       className={[
-        'inline-flex items-center gap-2 rounded-control px-3 py-1.5 text-sm transition-colors',
+        'inline-flex min-h-10 items-center justify-center gap-2 rounded-control px-3 py-1.5 text-sm transition-colors md:min-h-0',
         'disabled:pointer-events-none disabled:opacity-40',
         VARIANTS[variant],
         className,

@@ -62,7 +62,7 @@ export function ServersScreen() {
 
       {sorted.map((server) => (
         <Panel key={server.id}>
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
             <div className="min-w-0">
               <a
                 href={hrefFor(`/scouting/s/${server.id}`)}
@@ -85,10 +85,10 @@ export function ServersScreen() {
               )}
               <p className="mt-2 text-xs text-ink-faint">added by {server.createdBy}</p>
             </div>
-            <div className="flex shrink-0 gap-1">
+            <div className="-ml-3 flex shrink-0 gap-1 sm:ml-0">
               <a
                 href={hrefFor(`/scouting/s/${server.id}`)}
-                className="rounded-control px-3 py-1.5 text-sm text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                className="inline-flex min-h-10 items-center rounded-control px-3 py-1.5 text-sm text-accent transition-colors hover:bg-surface-2 hover:text-accent-hi md:min-h-0"
               >
                 Open map
               </a>

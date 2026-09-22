@@ -19,7 +19,7 @@ export function FailedWrites() {
       {failed.map((f) => (
         <div
           key={f.path}
-          className="flex items-start gap-3 rounded-panel bg-danger-dim px-4 py-3 ring-1 ring-danger/40"
+          className="flex flex-wrap items-start gap-3 rounded-panel bg-danger-dim px-4 py-3 ring-1 ring-danger/40"
         >
           <AlertIcon className="mt-0.5 size-4 shrink-0 text-danger" />
           <div className="min-w-0 flex-1">

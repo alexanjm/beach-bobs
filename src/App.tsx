@@ -58,7 +58,7 @@ function Home() {
     <div className="mx-auto max-w-2xl">
       <h2 className="text-lg text-ink">ARK Tools</h2>
       <p className="mt-2 max-w-prose text-sm text-ink-muted">
-        Pick a tool from the sidebar. Everything is readable without setup; add
+        Pick a tool from the menu. Everything is readable without setup; add
         a token in settings when you want to change something.
       </p>
       <a

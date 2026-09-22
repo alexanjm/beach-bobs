@@ -53,7 +53,7 @@ export function ScratchpadScreen() {
 
       {sorted.map((note) => (
         <Panel key={note.id}>
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
             <div className="min-w-0">
               <h3 className="text-sm font-medium text-ink">{note.title}</h3>
               {note.body && (
@@ -68,7 +68,7 @@ export function ScratchpadScreen() {
               </p>
             </div>
             {canWrite && (
-              <div className="flex shrink-0 gap-1">
+              <div className="-ml-3 flex shrink-0 gap-1 sm:ml-0">
                 <Button variant="ghost" onClick={() => setEditing(note)}>
                   Edit
                 </Button>
@@ -122,14 +122,14 @@ function NoteEditor({
           value={title}
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
-          className="rounded-control bg-surface-2 px-3 py-2 text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
+          className="rounded-control bg-surface-2 px-3 py-2 text-base md:text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
         />
         <textarea
           value={body}
           rows={4}
           placeholder="Notes…"
           onChange={(e) => setBody(e.target.value)}
-          className="resize-y rounded-control bg-surface-2 px-3 py-2 text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
+          className="resize-y rounded-control bg-surface-2 px-3 py-2 text-base md:text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
         />
         {error && <p className="text-xs text-danger">{error}</p>}
         <div className="flex justify-end gap-2">

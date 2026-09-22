@@ -33,16 +33,11 @@ export function AppShell({
   ]
 
   return (
-    <div className="flex min-h-screen">
-      <nav className="relative flex w-56 shrink-0 flex-col border-r border-line-soft bg-surface/70">
+    <div className="flex min-h-dvh">
+      <nav className="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line-soft bg-surface/70 md:flex">
         <div className="flex h-14 items-center gap-2.5 px-4">
           <PrismMark className="size-7 shrink-0" />
-          <span className="font-display text-[15px] font-bold tracking-[0.22em] text-ink uppercase">
-            Ark
-            <span className="ml-1.5 font-semibold tracking-[0.14em] text-accent-hi [text-shadow:0_0_12px_var(--color-accent-glow)]">
-              Tools
-            </span>
-          </span>
+          <Wordmark />
         </div>
         <div className="prism-rule mx-4 h-px opacity-60" />
 
@@ -61,16 +56,77 @@ export function AppShell({
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="relative flex h-14 shrink-0 items-center justify-between gap-4 px-6">
-          <h1 className="font-display text-sm font-semibold tracking-[0.12em] text-ink uppercase">
-            {title}
-          </h1>
-          <SyncBadge />
-          <div className="prism-rule absolute inset-x-0 bottom-0 h-px opacity-40" />
+        {/* On phones the header sticks and clears the notch / status bar. */}
+        <header className="sticky top-0 z-30 shrink-0 bg-bg/80 pt-[env(safe-area-inset-top)] backdrop-blur-md md:static md:bg-transparent md:pt-0 md:backdrop-blur-none">
+          <div className="relative flex h-12 items-center justify-between gap-3 px-4 md:h-14 md:px-6">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <a href={hrefFor('/')} className="shrink-0 md:hidden" aria-label="Home">
+                <PrismMark className="size-6" />
+              </a>
+              <h1 className="truncate font-display text-sm font-semibold tracking-[0.12em] text-ink uppercase">
+                {title}
+              </h1>
+            </div>
+            <SyncBadge />
+            <div className="prism-rule absolute inset-x-0 bottom-0 h-px opacity-40" />
+          </div>
         </header>
-        <main className="min-h-0 flex-1 overflow-auto p-6">{children}</main>
+        <main className="min-h-0 flex-1 p-4 pb-[calc(5rem+env(safe-area-inset-bottom))] md:p-6">
+          {children}
+        </main>
       </div>
+
+      <TabBar entries={[...tools, ...shellEntries]} path={path} />
     </div>
+  )
+}
+
+function Wordmark() {
+  return (
+    <span className="font-display text-[15px] font-bold tracking-[0.22em] text-ink uppercase">
+      Ark
+      <span className="ml-1.5 font-semibold tracking-[0.14em] text-accent-hi [text-shadow:0_0_12px_var(--color-accent-glow)]">
+        Tools
+      </span>
+    </span>
+  )
+}
+
+/* Phone navigation: thumb-reach tabs pinned to the bottom edge. */
+function TabBar({ entries, path }: { entries: NavEntry[]; path: string }) {
+  return (
+    <nav className="fixed inset-x-0 bottom-0 z-40 bg-surface/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden">
+      <div className="prism-rule h-px opacity-50" />
+      <div className="flex">
+        {entries.map((e) => {
+          const active = isActive(path, e.path)
+          const Icon = e.icon
+          return (
+            <a
+              key={e.id}
+              href={hrefFor(e.path)}
+              aria-current={active ? 'page' : undefined}
+              className={[
+                'relative flex min-h-14 flex-1 flex-col items-center justify-center gap-1 text-[11px] transition-colors',
+                active ? 'text-accent-hi' : 'text-ink-faint active:text-ink',
+              ].join(' ')}
+            >
+              {active && (
+                <span className="absolute top-0 h-0.5 w-8 rounded-full bg-accent-hi shadow-[0_0_10px_1px_var(--color-accent-glow)]" />
+              )}
+              <Icon
+                className={
+                  active
+                    ? 'size-5 drop-shadow-[0_0_6px_var(--color-accent-glow)]'
+                    : 'size-5'
+                }
+              />
+              {e.label}
+            </a>
+          )
+        })}
+      </div>
+    </nav>
   )
 }
 

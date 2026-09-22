@@ -97,7 +97,7 @@ function MapCard({ map, servers }: { map: MapConfig; servers: number }) {
       </div>
       <a
         href={hrefFor(`/scouting/maps/${map.id}/calibrate`)}
-        className="shrink-0 rounded-control px-2 py-1 text-xs text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
+        className="shrink-0 rounded-control px-2.5 py-2 text-xs text-ink-muted md:px-2 md:py-1 transition-colors hover:bg-surface-3 hover:text-ink"
       >
         Calibrate
       </a>

@@ -18,20 +18,20 @@ export function SyncBadge() {
     <div className="flex items-center gap-3">
       {sync.pendingWrites > 0 && (
         <span
-          className="text-xs text-ink-faint"
+          className="hidden text-xs text-ink-faint sm:inline"
           title="Saved to GitHub. Waiting for the index rebuild to pick it up."
         >
           {sync.pendingWrites} awaiting index
         </span>
       )}
 
-      <span className="flex items-center gap-2 text-xs text-ink-muted">
+      <span className="flex min-w-0 items-center gap-2 text-xs text-ink-muted">
         <span
           className="size-1.5 shrink-0 rounded-full"
           style={{ background: tone }}
           aria-hidden="true"
         />
-        {text}
+        <span className="max-w-[40vw] truncate md:max-w-xs">{text}</span>
       </span>
 
       {sync.lastError?.kind === 'auth' && (
@@ -47,7 +47,7 @@ export function SyncBadge() {
         onClick={() => void refresh()}
         disabled={sync.status === 'loading'}
         title="Refresh from GitHub"
-        className="rounded-control p-1.5 text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink disabled:opacity-40"
+        className="rounded-control p-2 text-ink-muted md:p-1.5 transition-colors hover:bg-surface-2 hover:text-ink disabled:opacity-40"
       >
         <RefreshIcon
           className={`size-4 ${sync.status === 'loading' ? 'animate-spin' : ''}`}

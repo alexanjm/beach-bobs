@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#0d2236"/>
+      <stop offset="100%" stop-color="#04070c"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="58%" r="50%">
+      <stop offset="0%" stop-color="#38b6f5" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#38b6f5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b5f1ff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#b5f1ff" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" fill="url(#bg)"/>
+  <g transform="translate(4.8 4.2) scale(0.7)">
+    <circle cx="16" cy="18" r="15" fill="url(#halo)"/>
+    <circle cx="16" cy="18" r="11.5" fill="none" stroke="#7fd4ff" stroke-opacity="0.55" stroke-width="0.75"/>
+    <rect x="15.4" y="1" width="1.2" height="16" fill="url(#beam)"/>
+    <g stroke-width="3.4" stroke-linecap="round" fill="none">
+      <path d="M14.9 7.6 L6.3 22.6" stroke="#ec6a55"/>
+      <path d="M17.1 7.6 L25.7 22.6" stroke="#c3dc4a"/>
+      <path d="M7.9 25.6 L24.1 25.6" stroke="#f2a93b"/>
+    </g>
+    <path d="M16 14 L19.6 20.8 L12.4 20.8 Z" fill="#b5f1ff" opacity="0.9"/>
+  </g>
+</svg>

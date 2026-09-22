@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { removeRecord, saveRecord } from '../../sync/store.ts'
 import { Button } from '../../ui/Button.tsx'
 import { Field, Input, Select, Textarea } from '../../ui/Field.tsx'
+import { useIsTouch } from '../../ui/useMedia.ts'
 import type { Gps } from './transform.ts'
 import type { Category, Location } from './types.ts'
 
@@ -25,6 +26,7 @@ export function LocationEditor({
   onDone: () => void
 }) {
   const ordered = [...categories].sort((a, b) => a.order - b.order)
+  const isTouch = useIsTouch()
 
   const [title, setTitle] = useState(location?.title ?? '')
   const [categoryId, setCategoryId] = useState(
@@ -93,7 +95,7 @@ export function LocationEditor({
 
       <Field label="Title">
         <Input
-          autoFocus
+          autoFocus={!isTouch}
           value={title}
           placeholder="Red Peak metal run"
           onChange={(e) => setTitle(e.target.value)}

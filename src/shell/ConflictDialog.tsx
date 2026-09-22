@@ -49,7 +49,7 @@ function Dialog({ conflict }: { conflict: Conflict }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-3 sm:p-6">
       <div className="flex max-h-full w-full max-w-2xl flex-col rounded-panel bg-surface ring-1 ring-line">
         <header className="border-b border-line-soft px-5 py-4">
           <h2 className="text-sm font-medium text-ink">
@@ -101,7 +101,7 @@ function Dialog({ conflict }: { conflict: Conflict }) {
           )}
         </div>
 
-        <footer className="flex items-center justify-between gap-2 border-t border-line-soft px-5 py-3">
+        <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-line-soft px-5 py-3">
           <Button variant="ghost" onClick={dismissConflict} disabled={busy}>
             Decide later
           </Button>

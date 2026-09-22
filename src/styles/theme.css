@@ -73,6 +73,15 @@
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
+  /* ——— motion ——— */
+  --animate-sheet-in: sheet-in 220ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  @keyframes sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+  }
+
   /* ——— radii: utilitarian, not pill-shaped ——— */
   --radius-panel: 6px;
   --radius-control: 4px;
@@ -80,6 +89,8 @@
 
 html {
   color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -154,6 +165,9 @@ body::before {
 /* ——— Leaflet, dragged into the palette ——————————————————————————————— */
 
 .leaflet-container {
+  /* Leaflet's panes and controls carry z-indexes up to 1000. Contain them so
+     the map can never float over the sticky header, tab bar or sheets. */
+  isolation: isolate;
   background: var(--color-bg);
   font-family: var(--font-sans);
   outline: none;

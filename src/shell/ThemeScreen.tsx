@@ -128,7 +128,7 @@ export function ThemeScreen() {
           <Row label="Field">
             <input
               placeholder="Red Peak metal run"
-              className="w-64 rounded-control bg-surface-2 px-3 py-1.5 text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
+              className="w-64 rounded-control bg-surface-2 px-3 py-1.5 text-base md:text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent"
             />
           </Row>
 

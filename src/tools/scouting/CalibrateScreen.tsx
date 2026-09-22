@@ -30,7 +30,7 @@ import { useImageMap } from './useImageMap.ts'
   sea.
 */
 
-const VIEWPORT = 'h-[calc(100dvh-6.5rem)] min-h-[32rem]'
+const VIEWPORT = 'md:h-[calc(100dvh-6.5rem)] md:min-h-[32rem]'
 const GRID_STEP = 10
 
 interface PointDraft {
@@ -218,7 +218,7 @@ export function CalibrateScreen() {
           {SOURCE_TEXT[transformSource(config)]}
           {size && ` · ${size.width}×${size.height}px`}
         </span>
-        <label className="ml-auto flex items-center gap-2 text-xs text-ink-muted">
+        <label className="flex items-center gap-2 py-1 text-xs text-ink-muted md:ml-auto">
           <input
             type="checkbox"
             checked={showGrid}
@@ -229,8 +229,8 @@ export function CalibrateScreen() {
         </label>
       </header>
 
-      <div className="flex min-h-0 flex-1 gap-3">
-        <div className="min-w-0 flex-1 overflow-hidden rounded-panel ring-1 ring-line-soft">
+      <div className="flex flex-col gap-3 md:min-h-0 md:flex-1 md:flex-row">
+        <div className="aspect-square max-h-[62dvh] w-full min-w-0 shrink-0 overflow-hidden rounded-panel ring-1 ring-line-soft md:aspect-auto md:h-auto md:max-h-none md:w-auto md:flex-1 md:shrink">
           {error ? (
             <div className="flex h-full items-center justify-center text-sm text-danger">
               {error}
@@ -240,7 +240,7 @@ export function CalibrateScreen() {
           )}
         </div>
 
-        <aside className="flex w-80 shrink-0 flex-col gap-3 overflow-y-auto">
+        <aside className="flex shrink-0 flex-col gap-3 md:w-80 md:overflow-y-auto">
           <ReadOnlyNotice />
 
           <div className="rounded-panel bg-surface p-3 text-xs text-ink-muted ring-1 ring-line-soft">

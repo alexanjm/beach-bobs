@@ -7,6 +7,8 @@ import { useCanWrite } from '../../sync/settings.ts'
 import { useRecords } from '../../sync/store.ts'
 import { Button } from '../../ui/Button.tsx'
 import { Input } from '../../ui/Field.tsx'
+import { Sheet } from '../../ui/Sheet.tsx'
+import { useIsMobile } from '../../ui/useMedia.ts'
 import { LocationEditor } from './LocationEditor.tsx'
 import { MapCanvas } from './MapCanvas.tsx'
 import { PLACEHOLDER_IMAGE } from './geometry.ts'
@@ -14,10 +16,12 @@ import type { Gps } from './transform.ts'
 import type { Category, Location, MapConfig, Server } from './types.ts'
 
 /*
-  One server's map. The height is pinned so the canvas fills the viewport:
-  3.5rem of header plus 3rem of shell padding.
+  One server's map. On desktop the height is pinned so the canvas fills the
+  viewport: 3.5rem of header plus 3rem of shell padding. On phones the map
+  takes most of the screen and the list scrolls underneath it; the editor and
+  pin detail open as a bottom sheet over the list.
 */
-const VIEWPORT = 'h-[calc(100dvh-6.5rem)] min-h-[32rem]'
+const VIEWPORT = 'md:h-[calc(100dvh-6.5rem)] md:min-h-[32rem]'
 
 type Draft = { location: Location | null; gps: Gps | null } | null
 
@@ -28,6 +32,7 @@ export function ServerMapScreen() {
   const categories = useRecords<Category>('categories')
   const allLocations = useRecords<Location>('locations')
   const canWrite = useCanWrite()
+  const isMobile = useIsMobile()
 
   const server = servers.find((s) => s.id === serverId) ?? null
   const config = maps.find((m) => m.id === server?.mapId) ?? null
@@ -98,6 +103,26 @@ export function ServerMapScreen() {
   const selected = locations.find((l) => l.id === selectedId) ?? null
   const usingPlaceholder = !config.image
 
+  const editor = draft && (
+    <LocationEditor
+      serverId={server.id}
+      location={draft.location}
+      initialGps={draft.gps}
+      categories={categories}
+      onDone={() => setDraft(null)}
+    />
+  )
+
+  const detail = selected && (
+    <Detail
+      location={selected}
+      category={categoryById.get(selected.categoryId) ?? null}
+      canWrite={canWrite}
+      onEdit={() => setDraft({ location: selected, gps: null })}
+      onClose={() => setSelectedId(null)}
+    />
+  )
+
   return (
     <div className={`flex flex-col gap-3 ${VIEWPORT}`}>
       <header className="flex shrink-0 flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -113,11 +138,11 @@ export function ServerMapScreen() {
           {server.cluster && ` · ${server.cluster}`} · {locations.length} pin
           {locations.length === 1 ? '' : 's'}
         </span>
-        <span className="ml-auto font-mono text-xs text-ink-faint">
-          {hover
+        <span className="font-mono text-xs text-ink-faint md:ml-auto">
+          {hover && !isMobile
             ? `lat ${hover.lat.toFixed(1)}  lon ${hover.lon.toFixed(1)}`
             : canWrite
-              ? 'click the map to drop a pin'
+              ? `${isMobile ? 'tap' : 'click'} the map to drop a pin`
               : 'read-only'}
         </span>
       </header>
@@ -131,8 +156,8 @@ export function ServerMapScreen() {
         </p>
       )}
 
-      <div className="flex min-h-0 flex-1 gap-3">
-        <div className="min-w-0 flex-1 overflow-hidden rounded-panel ring-1 ring-line-soft">
+      <div className="flex flex-col gap-3 md:min-h-0 md:flex-1 md:flex-row">
+        <div className="aspect-square max-h-[62dvh] w-full min-w-0 shrink-0 overflow-hidden rounded-panel ring-1 ring-line-soft md:aspect-auto md:h-auto md:max-h-none md:w-auto md:flex-1 md:shrink">
           <MapCanvas
             config={config}
             imageUrl={assetUrl(config.image ?? PLACEHOLDER_IMAGE)}
@@ -149,15 +174,9 @@ export function ServerMapScreen() {
           />
         </div>
 
-        <aside className="flex w-80 shrink-0 flex-col gap-3 overflow-y-auto">
-          {draft ? (
-            <LocationEditor
-              serverId={server.id}
-              location={draft.location}
-              initialGps={draft.gps}
-              categories={categories}
-              onDone={() => setDraft(null)}
-            />
+        <aside className="flex shrink-0 flex-col gap-3 md:w-80 md:overflow-y-auto">
+          {draft && !isMobile ? (
+            editor
           ) : (
             <>
               <Filters
@@ -173,17 +192,7 @@ export function ServerMapScreen() {
                 onAdd={() => setDraft({ location: null, gps: null })}
               />
 
-              {selected && (
-                <Detail
-                  location={selected}
-                  category={categoryById.get(selected.categoryId) ?? null}
-                  canWrite={canWrite}
-                  onEdit={() =>
-                    setDraft({ location: selected, gps: null })
-                  }
-                  onClose={() => setSelectedId(null)}
-                />
-              )}
+              {!isMobile && detail}
 
               <LocationList
                 locations={visible}
@@ -196,6 +205,12 @@ export function ServerMapScreen() {
           )}
         </aside>
       </div>
+
+      {isMobile && (draft || detail) && (
+        <Sheet key={draft ? 'editor' : `detail-${selectedId}`}>
+          {draft ? editor : detail}
+        </Sheet>
+      )}
     </div>
   )
 }
@@ -255,7 +270,7 @@ function Filters({
                 key={c.id}
                 onClick={() => toggle(c.id)}
                 className={[
-                  'inline-flex items-center gap-1.5 rounded-control px-2 py-1 text-xs transition-colors',
+                  'inline-flex items-center gap-1.5 rounded-control px-2.5 py-1.5 text-xs transition-colors md:px-2 md:py-1',
                   on
                     ? 'bg-surface-3 text-ink'
                     : 'bg-surface-2 text-ink-faint line-through',
@@ -282,7 +297,7 @@ function Filters({
               key={t}
               onClick={() => setTag(tag === t ? null : t)}
               className={[
-                'rounded-control px-2 py-0.5 text-xs transition-colors',
+                'rounded-control px-2.5 py-1 text-xs transition-colors md:px-2 md:py-0.5',
                 tag === t
                   ? 'bg-accent text-accent-ink'
                   : 'bg-surface-2 text-ink-muted hover:text-ink',
@@ -331,7 +346,7 @@ function LocationList({
             key={l.id}
             onClick={() => onSelect(l.id)}
             className={[
-              'flex items-center gap-2 rounded-control px-2 py-1.5 text-left text-xs transition-colors',
+              'flex items-center gap-2 rounded-control px-2 py-2.5 text-left text-sm transition-colors md:py-1.5 md:text-xs',
               l.id === selectedId
                 ? 'bg-surface-3 text-ink'
                 : 'text-ink-muted hover:bg-surface-2 hover:text-ink',
@@ -383,7 +398,8 @@ function Detail({
         </div>
         <button
           onClick={onClose}
-          className="shrink-0 rounded-control px-2 text-ink-faint hover:text-ink"
+          className="-m-1 shrink-0 rounded-control p-2 text-ink-faint hover:text-ink"
+          aria-label="Close"
         >
           ✕
         </button>

@@ -6,7 +6,7 @@ import type {
 } from 'react'
 
 const CONTROL =
-  'w-full rounded-control bg-surface-2 px-3 py-1.5 text-sm text-ink ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent disabled:opacity-50'
+  'w-full rounded-control bg-surface-2 px-3 py-2 text-base text-ink md:py-1.5 md:text-sm ring-1 ring-line ring-inset outline-none placeholder:text-ink-faint focus:ring-accent disabled:opacity-50'
 
 export function Field({
   label,
